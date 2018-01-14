@@ -22,33 +22,51 @@
 		<img src="profile pic.jpg" alt="profile" width="250" height="300">
 				<h2>Use Case:Author Joins Medium</h2>
 		<h4>Overview:Author Joins Medium in order to blog his stories for exposure</h4>
-		<h4>Acotrs:author,Medium</h4>
+		<h4>Actors:author,Medium</h4>
 		<ul>
 			<li>user goes to Medium site and clicks new account</li>
 			<li>Medium ask for user personal information or asks for social media verification</li>
 			<li>User clicks link to facebook profile</li>
 			<li>system pulls facebook info and prefills forms</li>
-			<li>user is now able to make post and comment on content</li>
-		</ul>
-				<h1>entities/Attributes</h1>
+			<li>user is now able to make post and comment on content</li></ul>
+
+			<H2>Relations</H2>
+			<ul>
+				<li>One <strong>User</strong>can have many articles-(1 to n)</li>
+				<li>Many <strong>Articles</strong> can be commented on by many <strong>Users</strong>-(m to n)</li>
+							</ul>
+
+		<h1>Conceptual Model</h1>
+
+				<h2>Entities/Attributes</h2>
 		<ul>
-			<li>Author</li>
-				<li>authorId/primary key</li>
-				<li>authorEmail</li>
-				<li>authorPhone</li>
+			<h3>USER</h3>
+				<li>userId  (primary key)</li>
+				<li>userEmail</li>
+				<li>userPhone</li>
 					</ul>
 		<ul>
-			<li>Article</li>
-			 <li>articleId/primary key</li>
-			 <li>articleContent</li>
-			<li>articleDateTime</li>
+			<h3>PROFILE</h3>
+			 <li>profileId  (primary key)</li>
+			 <li>firstName</li>
+			<li>lastName</li>
 		</ul>
 
 		<ul>
-			<li>Comment</li>
-				<li>commentCommenterId/primarykey</li>
-				<li>comentDateTime</li>
-				<li>commentContent</li>
+			<H3>ARTICLE</H3>
+				<li>articleProfileId   </li>
+				<li>articleText</li>
+				<li>articleDate</li>
 		</ul>
+
+		<ul>
+			<h3>COMMENT</h3>
+			<li>commentUserId</li>
+			<li>commentText</li>
+			<li>commentDate</li>
+		</ul>
+		<h1>ERD</h1>
+
+		<img src="Datadesign.jpg" alt="datadesign" width="700" height="450">
 	</body>
 </html>
