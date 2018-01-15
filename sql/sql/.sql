@@ -11,8 +11,8 @@ CREATE TABLE user (
 		userId BINARY(16) NOT NULL,
 		userEmail VARCHAR(32) NOT NULL,
 		userPassword Binary(16) NOT NULL,
-		PRIMARY KEY (USERId)
-	 );
+		PRIMARY KEY(userId)
+);
 
 CREATE TABLE profile (
 	profileId VARCHAR(32) NOT NULL,
