@@ -66,7 +66,7 @@ class Profile {
 	/**
 	 * @return mixed
 	 */
-	public function setlastName($newfirstName) {
+	public function setfirstName($newfirstName) {
 		//verify the first name is valid
 		$newfirstName = filter_has_str($newfirstName, FILTER_VALIDATE_STR);
 		if($newfirstName === false) {
