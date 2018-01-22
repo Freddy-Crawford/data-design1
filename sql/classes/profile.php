@@ -1,4 +1,5 @@
 <?php
+namespace edu\Cnm\DataDesign\ValidatUuid;
 /**
  * Typical profile for a blog sharing site
  *
@@ -29,21 +30,20 @@ class Profile {
 	public function getprofileId() {
 		return ($this->profileId);
 	}
-
 	/**
 	 * mutator method for profile id
 	 *
 	 * @param int $newprofileId new value of profile id
-	 * @throws UnexpectedValueException if $newprofileId is not an integer
+	 * @throws \UnexpectedValueException if $newprofileId is not an string
 	 **/
 	/**
 	 * @return mixed
 	 */
 	public function setprofileId($newprofileId) {
 		//verify the profile id is valid
-		$newprofileId = filter_has_var($newprofileId, FILTER_VALIDATE_INT);
+		$newprofileId = filter_has_var($newprofileId, FILTER_VALIDATE_STR);
 		if($newprofileId === false) {
-			throw(new UnexpectedValueException("profile id is not a valid integer"));
+			throw(new UnexpectedValueException("profile id is not a valid string"));
 		}
 		//convert and store the profile id
 		$this->profileId = intval($newprofileId);
