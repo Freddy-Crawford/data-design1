@@ -1,54 +1,104 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: macbookpro
- * Date: 1/19/18
- * Time: 8:32 PM
- */namespace Edu\Cnm\DataDesign;
-
-require_once ("autoloader.php");
-require_once (dirname(_DIR_,2) . "/vendor/autoload.php");
-
-use Ramsey\Uuid\Uuid;
-/**
- * @author Dylan McDonald <dmcdonald21@cnm.edu>
- * @version 3.0.0
+ * Typical profile for a blog sharing site
+ *
+ * this profile is an example of date collected from a blogging site that allows for sharing of writings.
+ * This can be extended to include name , phone number , and email address
+ *
+ * @author Freddy Crawford <fcrawford@cnm.edu>
  **/
-
-class profile implements \JsonSerializable {
-	use ValidateDate;
-	use ValidateUuid;
-	/**id for this profile; this is the primary key
-	 * @var Uuid $profileId
+class Profile {
+	/**
+	 * id for this profile; this is the primary key
 	 **/
 	private $profileId;
 	/**
-	 * @var Uuid $firstname
+	 * first name for the person who ons this profile
 	 **/
 	private $firstName;
-	/**last name of profile user
-	 * @var $lastName
+	/**
+	 * last name of the person who owns the profile
 	 **/
 	private $lastName;
+
 	/**
-	 * constructor for this profile
-	 * @param string\Uuid $profileId of this profile or null if invalid
-	 * @param string\Uuid $firstName attached to profile
-	 * @param string\Uuid $lastName attached to profile
-	 * @throws \InvalidArgumentException if data types are not valid
-	 * @throws \RangeException if data values are out of bounds
-	 * @throws \TypeError if data types violate type hints
-	 * @throws \Exception if some other exception occurs
-	 * @Documentation https://php.net/manual/en/language.oop5.decon.php
+	 * accessor method for profileId
+	 *
+	 * @return value of profile id
 	 **/
-	public function _construct($profileId,$firstName,$lastName = null) {
-		try {
-			$this->setprofilId($newprofileId);
-			$this->setfirstName($newfrstName);
-			$this->setlastName($newlastName);
-		}
-			catch(\InvalidArgumentException | \ RangeException | \Exception | \TypeError $exception)
-			{
-				$exceptionType = get_class($exception->getMessage(), 0, $exception));
-			}
+	public function getprofileId() {
+		return ($this->profileId);
 	}
+
+	/**
+	 * mutator method for profile id
+	 *
+	 * @param int $newprofileId new value of profile id
+	 * @throws UnexpectedValueException if $newprofileId is not an integer
+	 **/
+	/**
+	 * @return mixed
+	 */
+	public function setprofileId($newprofileId) {
+		//verify the profile id is valid
+		$newprofileId = filter_has_var($newprofileId, FILTER_VALIDATE_INT);
+		if($newprofileId === false) {
+			throw(new UnexpectedValueException("profile id is not a valid integer"));
+		}
+		//convert and store the profile id
+		$this->profileId = intval($newprofileId);
+	}
+
+	/**
+	 * accessor method for firstName
+	 * @return value of firstName
+	 **/
+	public function getfirstName() {
+		return ($this->firstName);
+	}
+
+	/**
+	 * mutator method for last name
+	 *
+	 * @param int $newlastName new value of last name
+	 * @throws UnexpectedValueException if $newlastName is not an string
+	 **/
+	/**
+	 * @return mixed
+	 */
+	public function setlastName($newfirstName) {
+		//verify the first name is valid
+		$newfirstName = filter_has_str($newfirstName, FILTER_VALIDATE_STR);
+		if($newfirstName === false) {
+			throw(new UnexpectedValueException("first name is not a valid string"));
+		}
+		//convert and store the first name
+		$this->firstName = strval($newfirstName);
+	}
+
+	/**
+	 * accessor method for lastName
+	 * @return value of lastName
+	 **/
+	public function getlastName() {
+		return ($this->lastName);
+		/**
+		 * mutator method for last name
+		 *
+		 * @param int $newlastName new value of last name
+		 * @throws UnexpectedValueException if $newlastName is not an string
+		 **/
+		/**
+		 * @return mixed
+		 */
+		ublic function setlastName($newlastName) {
+			//verify the last name is valid
+			$newlastName = filter_has_str($newlastName, FILTER_VALIDATE_STR);
+			if($newlastName === false) {
+				throw(new UnexpectedValueException("last name is not a valid string"));
+			}
+		}  		//convert and store the last name
+		   		$this->lastName = strval($newlastName);
+			}
+}
+?>
