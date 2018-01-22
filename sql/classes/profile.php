@@ -82,6 +82,7 @@ class Profile {
 	 **/
 	public function getlastName() {
 		return ($this->lastName);
+	}
 		/**
 		 * mutator method for last name
 		 *
@@ -91,13 +92,13 @@ class Profile {
 		/**
 		 * @return mixed
 		 */
-		ublic function setlastName($newlastName) {
+		public function setlastName($newlastName) {
 			//verify the last name is valid
 			$newlastName = filter_has_str($newlastName, FILTER_VALIDATE_STR);
 			if($newlastName === false) {
 				throw(new UnexpectedValueException("last name is not a valid string"));
 			}
-		}  		//convert and store the last name
+		  		//convert and store the last name
 		   		$this->lastName = strval($newlastName);
 			}
 }
