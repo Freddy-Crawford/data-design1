@@ -1,6 +1,9 @@
 <?php
 namespace Edu\Cnm\DataDesign;
-require_once("/vendor/autoload.php");
+
+require_once("autoload.php");
+require_once(dirname(__Dir__,2) . "/vendor/autoload.php");
+
 use Ramsey\Uuid\Uuid;
 /**
  * Cross Section of a Medium Profile1
@@ -11,7 +14,7 @@ use Ramsey\Uuid\Uuid;
  * @author Dylan McDonald <dmcdonald21@cnm.edu>
  * @version 4.0.0
  **/
-class Profile1 implements \JsonSerializable {
+class ProfileId implements \JsonSerializable {
 	use ValidateUuid;
 	/**
 	 * id for this Profile1; this is the primary key
@@ -72,7 +75,7 @@ class Profile1 implements \JsonSerializable {
 			$this->setProfileAtHandle($newProfileAtHandle);
 			$this->setfirstName($newFirstName);
 			$this->setProfileHash($newProfileHash);
-			$this->setProfilePhone($newLastName);
+			$this->setProfileLastName($newLastName);
 			$this->setProfileSalt($newProfileSalt);
 		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
 			//determine what exception type was thrown

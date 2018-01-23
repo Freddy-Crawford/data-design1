@@ -21,17 +21,17 @@ CREATE TABLE profile (
 	PRIMARY KEY(profileId)
 	);
 CREATE TABLE article (
-	articleProfileId BINARY(16) NOT NULL,
-	articleText VARCHAR(32) NOT NULL,
+	articleId BINARY(16) NOT NULL,
+	articleContent VARCHAR(32) NOT NULL,
 	article DATETIME(6) NOT NULL,
-	INDEX(articleProfileId),
+	INDEX(articleId),
 	FOREIGN KEY (articleProfileId) REFERENCES profile (profileId),
-	PRIMARY KEY(articleProfileId)
+	PRIMARY KEY(articleId)
 );
 CREATE TABLE comment (
 	commentId BINARY(16) NOT NULL,
 	commentUserId BINARY(16) NOT NULL,
-	commentText VARCHAR(32) NOT NULL,
+	commentContent VARCHAR(32) NOT NULL,
 	commentDate DATETIME(6),
 	INDEX(commentId),
 	FOREIGN KEY(commentUserId) REFERENCES user(userId),
