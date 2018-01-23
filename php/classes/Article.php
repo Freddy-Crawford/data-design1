@@ -1,8 +1,8 @@
 <?php
 namespace Edu\Cnm\DataDesign;
 
-require_once("autoload.php");
-require_once(dirname(__Dir__,2) . "/vendor/autoload.php");
+require_once("autoloader.php");
+require_once(dirname(__Dir__,2) . "/vendor/autoloader.php");
 
 use Ramsey\Uuid\Uuid;
 /**
@@ -185,8 +185,105 @@ public function insert(\PDO $pdo) : void {
 
 
 			// create query template
-	$query = "INSERT INTO article(articleId,articleProfileId, articleContent, ArticleDate) VALUES(:articleId, :articleProfileId, :articleContent, :articleDate);
+		$query = "INSERT INTO article(articleId, articleProfileId, articleContent, articleDate) VALUES(:articleId, :articleProfileId, :articleContent, :articleDate);
 $statement = $pdo->prepare($query);
 		
 		
 		// bind the member variables to the place holders in the template
+			$formattedDate = $this->articleDate->format("Y-m-d H:i:s.u");
+			$parameters = ["articleId => $this->articleId->getBytes(), "articleProfileId" => $this->articleProfileId->getBytes(), "articleContent"
+	=> $this->articleContent "articleDate" => $formattedDate];
+$statement->execute($parameters);
+
+			}
+
+			/**
+			 * deletes this article from mySQL
+			 *
+			 * @param \PDO $pdo PDO connection object
+			 * @throws \PDOException when mySQL related errors occur
+			 * @throws \TypeError if $pdo is not a PDO connection object
+			 *
+			 **/
+			public function delete (\PDO $pdo) : void {
+
+				// create query template
+				$query = "DELETE FROM comment WHERE articleId = :articleId";
+				$statement = $pdo->prepare($query);
+
+				// bind the member variables to the place holder in the template
+				$parameters = ["articleId" => $this->articleId->getBytes()];
+				$statement->execute($parameters);
+			}
+
+			/**
+			 * updates this article in mySql
+			 *
+			 * @param \PDO $pdo connection object
+			 * @throws \PDOException when my SQL related errors occur
+			 * @throws \TypeError if $pdo is not a PDO connection object
+			 **/
+			public function update(\PDO $pdo) : void {
+
+				// create query template
+				$query = "UPDATE article SET articleProfileId = :articleProfileId, articleContent = :articleContent,comentDate = :articleDate WHERE articleId = :articleId";
+				$statement = $pdo->prepare($query);
+
+
+				$formattedDate = $this->articleDate->format("Y-m-d H;i;s.u");
+				$parameters = ["articleId" => $this->articleId->getBytes(), "articleProfileId" => $this->articleProfileId->getBytes(), "articleContent" => $this->articleContent,
+					"articleDate" => $formattedDate];
+				$statement->execute($parameters);
+			}
+			}
+
+
+
+
+			}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
