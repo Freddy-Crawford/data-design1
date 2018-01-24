@@ -1,5 +1,5 @@
 <?php
-namespace Edu\Cnm\fcrawforrd\DataDesign;
+namespace Edu\Cnm\fcrawford\DataDesign;
 
 require_once("autoload.php");
 require_once(dirname(__DIR__, 2) . "/vendor/autoload.php");
@@ -44,10 +44,10 @@ class comment implements \JsonSerializable {
 	/**
 	 * constructor for this comment
 	 *
-	 * @param string|Uuid $newcommentId id of this comment or null if a new comment
-	 * @param string|Uuid $newcommentProfileId id of the Profile that sent this comment
-	 * @param string $newcommentContent string containing actual comment data
-	 * @param \DateTime|string|null $newcommentDate date and time comment was sent or null if set to current date and time
+	 * @param string|Uuid $newCommentId id of this comment or null if a new comment
+	 * @param string|Uuid $newCommentProfileId id of the Profile that sent this comment
+	 * @param string $newCommentContent string containing actual comment data
+	 * @param \DateTime|string|null $newCommentDate date and time comment was sent or null if set to current date and time
 	 * @throws \InvalidArgumentException if data types are not valid
 	 * @throws \RangeException if data values are out of bounds (e.g., strings too long, negative integers)
 	 * @throws \TypeError if data types violate type hints
@@ -56,10 +56,10 @@ class comment implements \JsonSerializable {
 	 **/
 	public function __construct($newCommentId, $newCommentProfileId, string $newCommentContent, $newCommentDate = null) {
 		try {
-			$this->setTweetId($newCommentId);
-			$this->setTweetProfileId($newCommentProfileId);
-			$this->setTweetContent($newComentContent);
-			$this->setTweetDate($newCommentDate);
+			$this->setCommentId($newCommentId);
+			$this->setCommentProfileId($newCommentProfileId);
+			$this->setCommentContent($newCommentContent);
+			$this->setCommentDate($newCommentDate);
 		}
 			//determine what exception type was thrown
 		catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
@@ -92,7 +92,7 @@ class comment implements \JsonSerializable {
 			throw(new $exceptionType($exception->getMessage(), 0, $exception));
 		}
 
-		// convert and store the commnt id
+		// convert and store the comment id
 		$this->commentId = $uuid;
 	}
 
@@ -108,7 +108,7 @@ class comment implements \JsonSerializable {
 	/**
 	 * mutator method for comment profile id
 	 *
-	 * @param string | Uuid $newComentProfileId new value of comment profile id
+	 * @param string | Uuid $newCommentProfileId new value of comment profile id
 	 * @throws \RangeException if $newCommentId is not positive
 	 * @throws \TypeError if $newCommentProfileId is not an integer
 	 **/
@@ -221,11 +221,11 @@ class comment implements \JsonSerializable {
 	public function delete(\PDO $pdo) : void {
 
 		// create query template
-		$query = "DELETE FROM tweet WHERE tweetId = :tweetId";
+		$query = "DELETE FROM comment WHERE commentId = :commentId";
 		$statement = $pdo->prepare($query);
 
 		// bind the member variables to the place holder in the template
-		$parameters = ["tweetId" => $this->tweetId->getBytes()];
+		$parameters = ["commentId" => $this->commentId->getBytes()];
 		$statement->execute($parameters);
 	}
 
@@ -243,7 +243,7 @@ class comment implements \JsonSerializable {
 		$statement = $pdo->prepare($query);
 
 
-		$formattedDate = $this->comentDate->format("Y-m-d H:i:s.u");
+		$formattedDate = $this->commentDate->format("Y-m-d H:i:s.u");
 		$parameters = ["commentId" => $this->commentId->getBytes(),"commentProfileId" => $this->commentProfileId->getBytes(), "commentContent" => $this->commentContent, "commentDate" => $formattedDate];
 		$statement->execute($parameters);
 	}
@@ -336,10 +336,10 @@ class comment implements \JsonSerializable {
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
 	 **/
-	public static function getCommentByCommentContent(\PDO $pdo, string $CommentContent) : \SplFixedArray {
+	public static function getCommentByCommentContent(\PDO $pdo, string $commentContent) : \SplFixedArray {
 		// sanitize the description before searching
-		$CommentContent = trim($CommentContent);
-		$tweetContent = filter_var($tweetContent, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+		$commentContent = trim($commentContent);
+		$commentContent = filter_var($commentContent, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 		if(empty($commentContent) === true) {
 			throw(new \PDOException("comment content is invalid"));
 		}
@@ -362,7 +362,7 @@ class comment implements \JsonSerializable {
 		while(($row = $statement->fetch()) !== false) {
 			try {
 				$comment = new comment($row["commentId"], $row["commentProfileId"], $row["commentContent"], $row["commentDate"]);
-				$comments[$comments->key()] = $coment;
+				$comments[$comments->key()] = $comment;
 				$comments->next();
 			} catch(\Exception $exception) {
 				// if the row couldn't be converted, rethrow it

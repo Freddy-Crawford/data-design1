@@ -9,9 +9,9 @@ DROP TABLE IF EXISTS profile;
 
 CREATE TABLE profile (
 		profileId BINARY(16) NOT NULL,
-		userEmail VARCHAR(32) NOT NULL,
-		userPassword Binary(16) NOT NULL,
-		PRIMARY KEY(userId)
+		Email VARCHAR(32) NOT NULL,
+		Password Binary(16) NOT NULL,
+		PRIMARY KEY(profileId)
 );
 
 CREATE TABLE user (
