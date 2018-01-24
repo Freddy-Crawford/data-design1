@@ -32,12 +32,12 @@ class comment implements \JsonSerializable {
 	private $commentProfileId;
 	/**
 	 * actual textual content of this comment
-	 * @var string $tweetContent
+	 * @var string $commentContent
 	 **/
 	private $commentContent;
 	/**
-	 * date and time this Tweet was sent, in a PHP DateTime object
-	 * @var \DateTime $tweetDate
+	 * date and time this comment was sent, in a PHP DateTime object
+	 * @var \DateTime $commentDate
 	 **/
 	private $commentDate;
 
@@ -332,7 +332,7 @@ class comment implements \JsonSerializable {
 	 *
 	 * @param \PDO $pdo PDO connection object
 	 * @param string $commentContent comment content to search for
-	 * @return \SplFixedArray SplFixedArray of Tweets found
+	 * @return \SplFixedArray SplFixedArray of comments found
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
 	 **/
