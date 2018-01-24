@@ -3,18 +3,18 @@ ALTER DATABASE fcrawford CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 DROP TABLE IF EXISTS comment;
 DROP TABLE IF EXISTS article;
-DROP TABLE IF EXISTS profile;
 DROP TABLE IF EXISTS user;
+DROP TABLE IF EXISTS profile;
 
 
-CREATE TABLE user (
-		userId BINARY(16) NOT NULL,
+CREATE TABLE profile (
+		profileId BINARY(16) NOT NULL,
 		userEmail VARCHAR(32) NOT NULL,
 		userPassword Binary(16) NOT NULL,
 		PRIMARY KEY(userId)
 );
 
-CREATE TABLE profile (
+CREATE TABLE user (
 	profileId BINARY(16) NOT NULL,
 	firstName VARCHAR(32),
 	lastName VARCHAR(32) NOT NULL,
@@ -30,11 +30,11 @@ CREATE TABLE article (
 );
 CREATE TABLE comment (
 	commentId BINARY(16) NOT NULL,
-	commentUserId BINARY(16) NOT NULL,
+	commentprofileId BINARY(16) NOT NULL,
 	commentContent VARCHAR(32) NOT NULL,
 	commentDate DATETIME(6),
 	INDEX(commentId),
-	FOREIGN KEY(commentUserId) REFERENCES user(userId),
+	FOREIGN KEY(commentProfileId) REFERENCES profile(profileId),
 	PRIMARY KEY (commentId)
 	);
 

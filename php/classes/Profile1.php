@@ -1,15 +1,15 @@
 <?php
-namespace Edu\Cnm\DataDesign;
+namespace Edu\Cnm\fcrawford\DataDesign;
 
 require_once("autoloader.php");
 require_once(dirname(__Dir__,2) . "/vendor/autoload.php");
 
 use Ramsey\Uuid\Uuid;
 /**
- * Cross Section of a Medium Profile1
+ * Cross Section of a Medium Profile
  *
  * This is a cross section of what is probably stored about a Medium. This entity is a top level entity that
- * holds the keys to the other entities in this example (i.e., comment  and Profile1).
+ * holds the keys to the other entities in this example (i.e., password  and email).
  * @author Freddy Crawford <fcrawford@cnm.edu
  * @author Dylan McDonald <dmcdonald21@cnm.edu>
  * @version 4.0.0
@@ -35,7 +35,7 @@ class ProfileId implements \JsonSerializable {
 	 * firstName for this Profile1
 	 * @var string $firstName
 	 **/
-	private $firstName;
+	private $email;
 	/**
 	 * hash for profile password
 	 * @var $profileHash
@@ -45,7 +45,7 @@ class ProfileId implements \JsonSerializable {
 	 * last name for this Profile1
 	 * @var string $lastName
 	 **/
-	private $lastName;
+	private $password;
 	/**
 	 * salt for profile password
 	 *
@@ -58,9 +58,9 @@ class ProfileId implements \JsonSerializable {
 	 * @param string|Uuid $newProfileId id of this Profile1 or null if a new Profile1
 	 * @param string $newProfileActivationToken activation token to safe guard against malicious accounts
 	 * @param string $newProfileAtHandle string containing newAtHandle
-	 * @param string $newFirstName string containing first name
+	 * @param string $newEmail string containing first name
 	 * @param string $newProfileHash string containing password hash
-	 * @param string $newLastName string containing last name
+	 * @param string $newPassword string containing last name
 	 * @param string $newProfileSalt string containing passowrd salt
 	 * @throws \InvalidArgumentException if data types are not valid
 	 * @throws \RangeException if data values are out of bounds (e.g., strings too long, negative integers)
@@ -73,9 +73,9 @@ class ProfileId implements \JsonSerializable {
 			$this->setProfileId($newProfileId);
 			$this->setProfileActivationToken($newProfileActivationToken);
 			$this->setProfileAtHandle($newProfileAtHandle);
-			$this->setfirstName($newFirstName);
+			$this->setPassword($newPasword);
 			$this->setProfileHash($newProfileHash);
-			$this->setProfileLastName($newLastName);
+			$this->setProfileEmail($newEmail);
 			$this->setProfileSalt($newProfileSalt);
 		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
 			//determine what exception type was thrown
@@ -170,9 +170,9 @@ class ProfileId implements \JsonSerializable {
 		$this->profileAtHandle = $newProfileAtHandle;
 	}
 	/**
-	 * accessor method for first name
+	 * accessor method for password
 	 *
-	 * @return string value of first name
+	 * @return string value of first nam
 	 **/
 	public function getfirstName(): string {
 		return $this->firstName;

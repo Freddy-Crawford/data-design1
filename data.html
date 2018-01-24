@@ -37,15 +37,16 @@
 
 				<h2>Entities/Attributes</h2>
 		<ul>
-			<h3>USER</h3>
-				<li>userId  (primary key)</li>
-				<li>userEmail</li>
-				<li>userPhone</li>
+			<h3>profile</h3>
+				<li>profileId  (primary key)</li>
+				<li>Email</li>
+				<li>Password</li>
 					</ul>
 		<ul>
-			<h3>PROFILE</h3>
-			 <li>profileId  (primary key)</li>
-			 <li>firstName</li>
+			<h3>user</h3>
+			 <li>userId  (primary key)</li>
+			<li>userProfileId(foreign key)</li>
+			  <li>firstName</li>
 			<li>lastName</li>
 		</ul>
 
@@ -59,9 +60,10 @@
 
 		<ul>
 			<h3>COMMENT</h3>
-			<li>commentUserId(foreign key)</li>
+			<li>commentId(primary key)</li>
 			<li>commentContent</li>
 			<li>commentDate</li>
+			<li>commentProfileId</li>
 		</ul>
 		<h1>Example ERD</h1>
 
