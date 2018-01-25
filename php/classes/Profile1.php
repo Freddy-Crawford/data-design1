@@ -68,12 +68,12 @@ class ProfileId implements \JsonSerializable {
 	 * @throws \Exception if some other exception occurs
 	 * @Documentation https://php.net/manual/en/language.oop5.decon.php
 	 **/
-	public function __construct($newProfileId, ?string $newProfileActivationToken, string $newProfileAtHandle, string $newFirstName, string $newProfileHash, ?string $newLastName, string $newProfileSalt) {
+	public function __construct($newProfileId, ?string $newProfileActivationToken, string $newProfileAtHandle, string $newPassword, string $newProfileHash, ?string $newLastName, string $newProfileSalt) {
 		try {
 			$this->setProfileId($newProfileId);
 			$this->setProfileActivationToken($newProfileActivationToken);
 			$this->setProfileAtHandle($newProfileAtHandle);
-			$this->setPassword($newPasword);
+			$this->setPassword($newPassword);
 			$this->setProfileHash($newProfileHash);
 			$this->setProfileEmail($newEmail);
 			$this->setProfileSalt($newProfileSalt);

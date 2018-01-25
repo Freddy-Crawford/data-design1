@@ -9,7 +9,7 @@ use Ramsey\Uuid\Uuid;
 /**
  * Small Cross Section of a Medium article Comment Message
  *
- * This comment can be considered a small example of what services like Medium store when commemnts are submitted and
+ * This comment can be considered a small example of what services like Medium store when comments are submitted and
  * received using Medium. This can easily be extended to emulate more features of Medium.
  *
  *

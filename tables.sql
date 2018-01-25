@@ -37,11 +37,3 @@ CREATE TABLE comment (
 	FOREIGN KEY(commentProfileId) REFERENCES profile(profileId),
 	PRIMARY KEY (commentId)
 	);
-
-
-
-
-
-
-
-
