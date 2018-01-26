@@ -9,9 +9,9 @@ use Ramsey\Uuid\Uuid;
 /**
  * Small Cross Section of a user profile
  *
- * This user can be considered a small example of what services like Twitter store when messages are sent and
- * received using Twitter. This can easily be extended to emulate more features of Twitter.
- *
+ * This user can be considered a small example of what services like Medium store when messages are sent and
+ * received using Medium
+ * @author Freddy Crawford <fcrawford@cnm.edu>
  * @author Dylan McDonald <dmcdonald21@cnm.edu>
  * @version 3.0.0
  **/
@@ -141,10 +141,10 @@ class user implements \JsonSerializable {
 	 **/
 	public function setUserFirstName(string $newUserFirstName) : void {
 		// verify the user first name is secure
-		$newuserFirstName = trim($newUserFirstName);
-		$newuserFirstName = filter_var($newuserFirstName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-		if(empty($newuserFirstName) === true) {
-			throw(new \InvalidArgumentException("user content is empty or insecure"));
+		$newUserFirstName = trim($newUserFirstName);
+		$newUserFirstName = filter_var($newUserFirstName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+		if(empty($newUserFirstName) === true) {
+			throw(new \InvalidArgumentException("user name is empty or insecure"));
 		}
 
 		// verify the user first name will fit in the database
@@ -153,7 +153,7 @@ class user implements \JsonSerializable {
 		}
 
 		// store the user first name
-		$this->userFirstName = $newuserFirstName;
+		$this->userFirstName = $newUserFirstName;
 	}
 	/**
 	 * accessor method for user last name
@@ -174,9 +174,9 @@ class user implements \JsonSerializable {
 	 **/
 	public function setUserLastName(string $newUserLastName) : void {
 		// verify the user first name is secure
-		$newuserLastName = trim($newUserLastName);
-		$newuserLastName = filter_var($newuserLastName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-		if(empty($newuserContent) === true) {
+		$newUserLastName = trim($newUserLastName);
+		$newUserLastName = filter_var($newUserLastName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+		if(empty($newUserContent) === true) {
 			throw(new \InvalidArgumentException("user content is empty or insecure"));
 		}
 
@@ -186,7 +186,7 @@ class user implements \JsonSerializable {
 		}
 
 		// store the user first name
-		$this->userLastName = $newuserLastName;
+		$this->userLastName = $newUserLastName;
 	}
 
 
@@ -254,7 +254,7 @@ class user implements \JsonSerializable {
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when a variable are not the correct data type
 	 **/
-	public static function getuserByuserId(\PDO $pdo, $userId) : ?user {
+	public static function getUserByUserId(\PDO $pdo, $userId) : ?user {
 		// sanitize the userId before searching
 		try {
 			$userId = self::validateUuid($userId);
@@ -294,7 +294,7 @@ class user implements \JsonSerializable {
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
 	 **/
-	public static function getuserByuserProfileId(\PDO $pdo, $userProfileId) : \SplFixedArray {
+	public static function getUserByUserProfileId(\PDO $pdo, $userProfileId) : \SplFixedArray {
 
 		try {
 			$userProfileId = self::validateUuid($userProfileId);
@@ -333,7 +333,7 @@ class user implements \JsonSerializable {
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
 	 **/
-	public static function getuserByuserFirstName(\PDO $pdo, string $userFirstName) : \SplFixedArray {
+	public static function getUserByUserFirstName(\PDO $pdo, string $userFirstName) : \SplFixedArray {
 		// sanitize the description before searching
 		$userFirstName = trim($userFirstName);
 		$userFirstName = filter_var($userFirstName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
@@ -377,7 +377,7 @@ class user implements \JsonSerializable {
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
 	 **/
-	public static function getAllusers(\PDO $pdo) : \SPLFixedArray {
+	public static function getAllUsers(\PDO $pdo) : \SPLFixedArray {
 		// create query template
 		$query = "SELECT userId, userProfileId, userFirstName, userLastName FROM user";
 		$statement = $pdo->prepare($query);

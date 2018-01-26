@@ -138,7 +138,7 @@ class comment implements \JsonSerializable {
 	 *
 	 * @param string $newCommentContent new value of comment content
 	 * @throws \InvalidArgumentException if $newCommentContent is not a string or insecure
-	 * @throws \RangeException if $newcommentContent is > 1600 characters
+	 * @throws \RangeException if $newCommentContent is > 1600 characters
 	 * @throws \TypeError if $newCommentContent is not a string
 	 **/
 	public function setCommentContent(string $newCommentContent) : void {
